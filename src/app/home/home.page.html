@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My draggable list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollY="false" scrollEvents="true">
+  <ion-list>
+    <div *ngFor="let item of items" draggable="true" (dragstart)="onDragStart($event, item)" (dragenter)="onDragEnter($event, item)">
+      <ion-item draggable="true" (dragstart)="onDragStart($event, item)" (dragenter)="onDragEnter($event, item)">{{item}}</ion-item>
+    </div>
+  </ion-list>
+
+  <div class="dropZoneStyle" (drop)="onDrop($event)" (dragenter)="onDragEnter($event, undefined)">drop here</div>
+</ion-content>
