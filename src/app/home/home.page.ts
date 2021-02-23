@@ -25,7 +25,7 @@ export class HomePage {
   }
 
   onDragEnter(event: DragEvent, item: string): void {
-    console.log('drag enter:' + item);
+    console.log('drag enter/over:' + item);
     event.preventDefault();
   }
 

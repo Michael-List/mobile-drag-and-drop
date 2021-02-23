@@ -13,5 +13,5 @@
     </div>
   </ion-list>
 
-  <div class="dropZoneStyle" (drop)="onDrop($event)" (dragenter)="onDragEnter($event, 'dropzone')">drop here</div>
+  <div class="dropZoneStyle" (drop)="onDrop($event)" (dragover)="onDragEnter($event, 'dropzone')" (dragenter)="onDragEnter($event, 'dropzone')">drop here</div>
 </ion-content>
