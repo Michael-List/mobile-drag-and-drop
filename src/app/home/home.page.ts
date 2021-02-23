@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomePage {
   items: string[] = [];
   dragStartElement: Element;
 
-  constructor() {
+  constructor(public toastCtrl: ToastController) {
     for (let i = 0; i < 5; i++) {
       this.items.push('Item no.' + i);
     }
@@ -18,9 +19,9 @@ export class HomePage {
   onDragStart(event: DragEvent, item: string) {
     console.log('drag start:' + item);
     this.dragStartElement = event.target as Element;
-    event.dataTransfer.setData('text', 'dragging item ' + item);
+    event.dataTransfer.setData('text', 'dragging ' + item);
 
-    const dragImage = this.createDragImage('dragging item ' + item);
+    const dragImage = this.createDragImage('dragging ' + item);
     event.dataTransfer.setDragImage(dragImage, 0, 0);
   }
 
@@ -29,8 +30,15 @@ export class HomePage {
     event.preventDefault();
   }
 
-  onDrop(event: DragEvent): void {
-    console.log('dropped data was: ' + event.dataTransfer.getData('text'));
+  async onDrop(event: DragEvent): Promise<void> {
+    const message = 'dropped data was: ' + event.dataTransfer.getData('text');
+    console.log(message);
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 3000,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 
   createDragImage(text: string): HTMLCanvasElement {
